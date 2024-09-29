@@ -9,6 +9,11 @@ public class Horario {
         this.minutos = minutos;
     }
 
+    public Horario(Horario horario) {
+        this.hora = horario.hora();
+        this.minutos = horario.minutos();
+    }
+
     public int hora() {
         return hora;
     }
@@ -18,18 +23,26 @@ public class Horario {
     }
 
     @Override public String toString() {
-        if(this.hora() < 10 && this.minutos() < 10) return "0" + this.hora()+":0"+this.minutos();
-        
-        if(this.hora() < 10) return "0"+this.hora()+":"+this.minutos();
-        
-        if(this.minutos() < 10) return this.hora()+":0"+this.minutos();
-
-        return this.hora()+":"+this.minutos();
-        
+        return this.hora()+":"+this.minutos();   
     }
 
     @Override public boolean equals(Object otro) {
-        return (this.toString() == otro.toString());
+        //Chequeo base de si es null o dif clase
+        boolean otroEsNull = (otro == null);
+
+        boolean claseDistinta = otro.getClass() != this.getClass();
+
+        if (otroEsNull || claseDistinta) {
+			return false;
+		}
+
+        //Chequeo de la clase
+        //  casting -> cambiar el tipo
+		Horario otroHorario = (Horario) otro;
+
+
+		// comparar item a ítem
+		return this.hora() == otroHorario.hora() && this.minutos() == otroHorario.minutos();
     }
 
 }

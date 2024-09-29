@@ -1,39 +1,66 @@
 package aed;
 
 class ArregloRedimensionableDeRecordatorios {
+    private Recordatorio[] listaRecordatorios;
 
     public ArregloRedimensionableDeRecordatorios() {
-        // Implementar
+        listaRecordatorios = new Recordatorio[0];
     }
 
     public int longitud() {
-        // Implementar
-        return -1;
+        return this.listaRecordatorios.length;
     }
 
     public void agregarAtras(Recordatorio i) {
-        // Implementar
+        Recordatorio newList[] = new Recordatorio[this.longitud()+1];
+
+        for(int j = 0; j < this.longitud() ; j++) newList[j] = listaRecordatorios[j];
+
+        System.err.println(this.longitud()+1);
+
+        newList[this.longitud()] = i;
+
+        listaRecordatorios = newList;
     }
 
     public Recordatorio obtener(int i) {
-        // Implementar
-        return null;
+        return listaRecordatorios[i];
     }
 
     public void quitarAtras() {
-        // Implementar
+        Recordatorio newList[] = new Recordatorio[this.longitud()-1];
+
+        for(int j = 0; j < this.longitud()-1 ; j++) newList[j] = listaRecordatorios[j];
+
+        listaRecordatorios = newList;
     }
 
     public void modificarPosicion(int indice, Recordatorio valor) {
-        // Implementar
+        Recordatorio newList[] = new Recordatorio[this.longitud()];
+
+        for(int j = 0; j < this.longitud() ; j++){
+            if(j == indice){
+                newList[j] = valor;
+            }else{
+                newList[j] = listaRecordatorios[j];
+            }  
+        }
+        listaRecordatorios = newList;
     }
 
     public ArregloRedimensionableDeRecordatorios(ArregloRedimensionableDeRecordatorios vector) {
-        // Implementar
+        Recordatorio newList[] = new Recordatorio[vector.longitud()];
+
+        for(int j = 0; j < vector.longitud() ; j++) newList[j] = vector.obtener(j);
+
+        listaRecordatorios = newList;
     }
 
     public ArregloRedimensionableDeRecordatorios copiar() {
-        // Implementar
-        return null;
+        ArregloRedimensionableDeRecordatorios nuevoArreglo = new ArregloRedimensionableDeRecordatorios();
+
+        for(int i = 0; i < this.longitud(); i++) nuevoArreglo.agregarAtras(this.obtener(i));
+
+        return nuevoArreglo;
     }
 }

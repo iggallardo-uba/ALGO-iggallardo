@@ -10,8 +10,8 @@ public class Fecha {
     }
 
     public Fecha(Fecha fecha) {
-        dia = fecha.dia();
-        mes = fecha.mes();
+        this.dia = fecha.dia();
+        this.mes = fecha.mes();
     }
 
     public Integer dia() {
@@ -27,8 +27,23 @@ public class Fecha {
     }
 
     // Chequear si esto ta bien (Creo que no)
-    @Override public boolean equals(Object otra) {
-        return (this.toString() == otra.toString());
+    @Override public boolean equals(Object otro) {
+        //Chequeo base de si es null o dif clase
+        boolean otroEsNull = (otro == null);
+
+        boolean claseDistinta = otro.getClass() != this.getClass();
+
+        if (otroEsNull || claseDistinta) {
+			return false;
+		}
+
+        //Chequeo de la clase
+        //  casting -> cambiar el tipo
+		Fecha otroFecha = (Fecha) otro;
+
+
+		// comparar item a ítem
+		return this.dia() == otroFecha.dia() && this.mes() == otroFecha.mes();
     }
 
     public void incrementarDia() {

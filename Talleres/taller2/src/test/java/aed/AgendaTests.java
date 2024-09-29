@@ -32,7 +32,7 @@ public class AgendaTests {
 
         String fstring = "6/10";
 
-        //assertEquals(f, f2);
+        assertEquals(f, f2);
         assertNotEquals(f, f3);
         assertNotEquals(f, f4);
         assertNotEquals(fstring, f);
@@ -102,7 +102,7 @@ public class AgendaTests {
         Horario h4 = new Horario(11, 30);
         String hstring = "10:35";
 
-        //assertEquals(h, h2);
+        assertEquals(h, h2);
         assertNotEquals(h, h3);
         assertNotEquals(h, h4);
         assertNotEquals(hstring, h);

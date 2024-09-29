@@ -8,16 +8,16 @@ public class Recordatorio {
 
     public Recordatorio(String mensaje, Fecha fecha, Horario horario) {
         this.mensaje = mensaje;
-        this.fecha = fecha;
-        this.horario = horario;
+        this.fecha = new Fecha(fecha);
+        this.horario = new Horario(horario);
     }
 
     public Horario horario() {
-        return horario;
+        return new Horario(this.horario);
     }
 
     public Fecha fecha() {
-        return fecha;
+        return new Fecha(this.fecha);
     }
 
     public String mensaje() {
@@ -25,11 +25,26 @@ public class Recordatorio {
     }
 
     @Override public String toString() {
-        return this.mensaje() + ", fecha" + this.fecha().toString() + " y horario " + this.horario().toString() + " hs";
+        return this.mensaje() + " @ " + this.fecha().toString() + " " + this.horario().toString();
     }
 
     @Override public boolean equals(Object otro) {
-        return this.toString() == otro.toString();
+                //Chequeo base de si es null o dif clase
+                boolean otroEsNull = (otro == null);
+
+                boolean claseDistinta = otro.getClass() != this.getClass();
+        
+                if (otroEsNull || claseDistinta) {
+                    return false;
+                }
+        
+                //Chequeo de la clase
+                //  casting -> cambiar el tipo
+                Recordatorio otroRecordatorio = (Recordatorio) otro;
+        
+        
+                // comparar item a ítem
+                return this.mensaje() == otroRecordatorio.mensaje() && this.fecha().equals(otroRecordatorio.fecha()) && this.horario().equals(otroRecordatorio.horario());
     }
 
 }
