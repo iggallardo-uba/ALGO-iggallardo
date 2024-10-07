@@ -26,11 +26,9 @@ public class ListaEnlazada<T> implements Secuencia<T> {
     }
 
     public int longitud() {
-        //Caso 0 y Caso 1
         if(primero == null && ultimo == null) return 0;
         if(primero == ultimo) return 1;
 
-        //Resto de casos
         int longitud = 0;
         Nodo nodo = primero;
 
@@ -40,10 +38,8 @@ public class ListaEnlazada<T> implements Secuencia<T> {
     }
 
     public void agregarAdelante(T elem) {
-        //Nodo a agregar
         Nodo nodo = new Nodo(elem);
 
-        //Caso longitud es 0
         if(primero == null) {
             primero = nodo;
             ultimo = nodo;
@@ -60,7 +56,6 @@ public class ListaEnlazada<T> implements Secuencia<T> {
 
         if(ultimo == null) {
             primero = new Nodo(elem);
-            //asegurar misma memoria
             ultimo = primero;
         } else {
             ultimo.siguiente = nodo;
