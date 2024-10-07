@@ -2,6 +2,8 @@ package aed;
 
 import java.util.*;
 
+import javax.swing.text.html.StyleSheet.ListPainter;
+
 public class ListaEnlazada<T> implements Secuencia<T> {
     private Nodo primero;
     private Nodo ultimo;
@@ -156,25 +158,37 @@ public class ListaEnlazada<T> implements Secuencia<T> {
     }
 
     private class ListaIterador implements Iterador<T> {
+        int indice;
+
+        ListaIterador(){
+            this.indice = 0;
+        }
+
         public boolean haySiguiente() {
-	        throw new UnsupportedOperationException("No implementada aun");
+	        return indice < longitud();
         }
         
         public boolean hayAnterior() {
-	        throw new UnsupportedOperationException("No implementada aun");
+	        return indice > 0;
         }
 
         public T siguiente() {
-	        throw new UnsupportedOperationException("No implementada aun");
+	        int i = indice;
+            indice = indice + 1;
+
+            return obtener(i);
         }
         
 
         public T anterior() {
-	        throw new UnsupportedOperationException("No implementada aun");
+	        int i = indice - 1;
+            indice = indice - 1;
+
+            return obtener(i);
         }
     }
 
     public Iterador<T> iterador() {
-	    throw new UnsupportedOperationException("No implementada aun");
+	    return new ListaIterador();
     }
 }
