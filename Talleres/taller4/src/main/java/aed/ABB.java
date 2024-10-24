@@ -122,9 +122,19 @@ public class ABB<T extends Comparable<T>> implements Conjunto<T> {
     }
 
     public String toString(){
-        throw new UnsupportedOperationException("No implementada aun");
-    }
+        if (this.cardinal() == 0) return "{}";
+        if (this.cardinal() == 1) return "{" + root.valor.toString() + "}";
 
+        Iterador<T> iterador = this.iterador();
+
+        String ABBstring = "{";
+
+        for(int i = 0; i < this.cardinal()-1; i++)
+            ABBstring = ABBstring + iterador.siguiente().toString() + ",";
+        ABBstring = ABBstring + iterador.siguiente().toString() + "}";
+
+        return ABBstring;
+       }
     //Minimo Nodo 
     private Nodo minimoNodoIt(Nodo root){
         if (root.izquierdo == null) return root;
@@ -138,27 +148,62 @@ public class ABB<T extends Comparable<T>> implements Conjunto<T> {
 
         public ABB_Iterador(){
             nodoActual = minimoNodoIt(root);
-            valorActual = root.valor;
         }
 
         public boolean haySiguiente() {  
-            valorActual = nodoActual.valor;
-            
-            if(nodoActual.derecho != null){
-                return true;
+            if(nodoActual.derecho == null && nodoActual.izquierdo == null){
+                if(nodoActual.padre == null) return false;
+                else{
+                    if(nodoActual.padre.valor.compareTo(valorActual) > 0){
+                        nodoActual = nodoActual.padre;
+                        if(nodoActual.padre == null) return true;
+                        else return haySiguiente();
+                    } else if (nodoActual.padre.valor.compareTo(valorActual) == 0) return true;
+                    else{
+                        nodoActual = nodoActual.padre;
+                        return haySiguiente();
+                    }      
+                }
             }
-            if(nodoActual.padre != null){
-                nodoActual = nodoActual.padre;
 
-                if(valorActual.compareTo(nodoActual.valor) > 1) return true;
+            if(nodoActual.padre == null){
+                nodoActual = nodoActual.derecho;
+                return haySiguiente();
             }
+
+            if(nodoActual.izquierdo != null){
+                if(nodoActual.izquierdo.valor.compareTo(valorActual) > 0){
+                    nodoActual = nodoActual.izquierdo;
+                    if(nodoActual.izquierdo == null) return true;
+                    else return haySiguiente();
+                }
+            }
+
+            if(nodoActual.derecho != null){
+                if(nodoActual.valor.compareTo(valorActual) > 0){
+                    return true;
+                }
+                
+                if(nodoActual.derecho.valor.compareTo(valorActual) > 0){
+                    nodoActual = nodoActual.derecho;
+                    return haySiguiente();
+                }
+            }
+            
+            if(nodoActual.padre.valor.compareTo(valorActual) > 0){
+                nodoActual = nodoActual.padre;
+                return haySiguiente();
+            }
+
+
 
             return false;
         }
     
         public T siguiente() {
+            valorActual = nodoActual.valor;
             haySiguiente();
-
+            
             return valorActual;
         }
     }
