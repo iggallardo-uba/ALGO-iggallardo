@@ -32,7 +32,6 @@ public class ABB<T extends Comparable<T>> implements Conjunto<T> {
     private int cardinalNodo(Nodo root){
         if(root == null) return 0;
         return 1 + cardinalNodo(root.izquierdo) + cardinalNodo(root.derecho);
-
     }
 
     public T minimo(){
@@ -150,6 +149,18 @@ public class ABB<T extends Comparable<T>> implements Conjunto<T> {
             nodoActual = minimoNodoIt(root);
         }
 
+
+
+        public boolean haySiguiente() {  
+
+        }
+
+        public T siguiente() {
+            
+        }
+
+        /* 
+        Fuck recursion, all my homies love iteration
         public boolean haySiguiente() {  
             if(nodoActual.derecho == null && nodoActual.izquierdo == null){
                 if(nodoActual.padre == null) return false;
@@ -167,6 +178,8 @@ public class ABB<T extends Comparable<T>> implements Conjunto<T> {
             }
 
             if(nodoActual.padre == null){
+                if(nodoActual.derecho == null) return true;
+                
                 nodoActual = nodoActual.derecho;
                 return haySiguiente();
             }
@@ -188,14 +201,16 @@ public class ABB<T extends Comparable<T>> implements Conjunto<T> {
                     nodoActual = nodoActual.derecho;
                     return haySiguiente();
                 }
+            } else {
+                if(nodoActual.valor.compareTo(valorActual) > 0 && nodoActual.padre.valor.compareTo(valorActual) > 0){
+                    return true;
+                }
             }
             
             if(nodoActual.padre.valor.compareTo(valorActual) > 0){
                 nodoActual = nodoActual.padre;
                 return haySiguiente();
             }
-
-
 
             return false;
         }
@@ -207,9 +222,9 @@ public class ABB<T extends Comparable<T>> implements Conjunto<T> {
             return valorActual;
         }
     }
+    */
 
     public Iterador<T> iterador() {
         return new ABB_Iterador();
     }
-
 }

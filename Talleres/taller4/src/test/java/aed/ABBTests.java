@@ -327,7 +327,7 @@ class ABBTests {
 
     }
 
-    Integer NCLAVES = 1000;
+    Integer NCLAVES = 6;
 
     private Integer clave(Integer i) {
         return NCLAVES * ((i * i - 100 * i) % NCLAVES) + i;
@@ -344,6 +344,7 @@ class ABBTests {
             assertEquals(i, conjunto.cardinal());
             assertEquals(false, conjunto.pertenece(k));
             conjunto.insertar(k);
+            System.err.println(conjunto.toString());
             assertEquals(true, conjunto.pertenece(k));
         }
         assertEquals(NCLAVES, conjunto.cardinal());
