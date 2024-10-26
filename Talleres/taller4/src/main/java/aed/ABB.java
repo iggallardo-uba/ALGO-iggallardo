@@ -149,14 +149,28 @@ public class ABB<T extends Comparable<T>> implements Conjunto<T> {
             nodoActual = minimoNodoIt(root);
         }
 
-
-
         public boolean haySiguiente() {  
-
+            return true;
         }
 
         public T siguiente() {
-            
+            valorActual = nodoActual.valor;
+
+            nodoActual = siguienteRecursivo(nodoActual);
+
+            return valorActual;
+        }
+
+        public Nodo siguienteRecursivo(Nodo root){
+            if(root.derecho !=  null) return minimoNodoIt(root.derecho);
+        
+            while (root.padre != null && root == root.padre.derecho) {
+                root = root.padre;
+            }
+
+            if (root.padre == null) return root;
+
+            return root.padre;
         }
 
         /* 
@@ -221,8 +235,8 @@ public class ABB<T extends Comparable<T>> implements Conjunto<T> {
             
             return valorActual;
         }
-    }
     */
+    }
 
     public Iterador<T> iterador() {
         return new ABB_Iterador();

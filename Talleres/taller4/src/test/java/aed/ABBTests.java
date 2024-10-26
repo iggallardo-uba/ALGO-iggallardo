@@ -327,7 +327,7 @@ class ABBTests {
 
     }
 
-    Integer NCLAVES = 6;
+    Integer NCLAVES = 9;
 
     private Integer clave(Integer i) {
         return NCLAVES * ((i * i - 100 * i) % NCLAVES) + i;
