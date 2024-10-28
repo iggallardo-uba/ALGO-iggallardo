@@ -3,6 +3,7 @@ package aed;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
+import org.junit.platform.commons.util.StringUtils;
 
 class ABBTests {
 
@@ -327,7 +328,7 @@ class ABBTests {
 
     }
 
-    Integer NCLAVES = 9;
+    Integer NCLAVES = 1000;
 
     private Integer clave(Integer i) {
         return NCLAVES * ((i * i - 100 * i) % NCLAVES) + i;
@@ -344,7 +345,6 @@ class ABBTests {
             assertEquals(i, conjunto.cardinal());
             assertEquals(false, conjunto.pertenece(k));
             conjunto.insertar(k);
-            System.err.println(conjunto.toString());
             assertEquals(true, conjunto.pertenece(k));
         }
         assertEquals(NCLAVES, conjunto.cardinal());
@@ -363,6 +363,7 @@ class ABBTests {
         // Eliminar los valores para i par
         for (Integer i = 0; i < NCLAVES; i++) {
             Integer k = clave(i);
+            System.out.println(conjunto.toString().split("," + k.toString(), -1).length-1);
             assertTrue(conjunto.pertenece(k));
             if (i % 2 == 0) {
                 conjunto.eliminar(k);

@@ -91,12 +91,11 @@ public class ABB<T extends Comparable<T>> implements Conjunto<T> {
     private Nodo eliminarNodo(T elem, Nodo root){
         if (root == null) return root;
         
-        if (root.valor != elem){
-            int comparacion = root.valor.compareTo(elem);
+        int comparacion = root.valor.compareTo(elem);
 
+        if (comparacion != 0){
             if (comparacion > 0) root.izquierdo = eliminarNodo(elem, root.izquierdo);
             if (comparacion < 0) root.derecho = eliminarNodo(elem, root.derecho);
-        
         } else{
             if(root.derecho == null && root.izquierdo == null) return null;
             //Cuidado estos casos y sus padres
