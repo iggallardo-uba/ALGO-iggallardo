@@ -3,7 +3,6 @@ package aed;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
-import org.junit.platform.commons.util.StringUtils;
 
 class ABBTests {
 
